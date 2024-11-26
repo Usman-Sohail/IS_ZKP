@@ -1,0 +1,194 @@
+/* Reset margin and padding for html and body */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Container for the entire login page */
+.login-container {
+  display: flex;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  flex-wrap: wrap; /* Allow wrapping on smaller screens */
+}
+
+/* Left section containing the logo and image */
+.login-left {
+  margin: 20px;
+  height: auto; /* Allow height to adjust */
+  background-color: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 0.5;
+  width: 100%; /* Default width for smaller screens */
+  max-width: 500px; /* Limit the max width */
+}
+
+/* Fix scrolling issue */
+* {
+  box-sizing: border-box;
+}
+
+/* Logo and text at the top */
+.login-logo-and-text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-self: flex-start; /* Push logo to the left */
+  margin: 25px;
+  margin-bottom: 100px; /* Push logo up */
+  margin-top: 0;
+}
+
+#login-unipal-logo {
+  margin-bottom: 20px;
+}
+
+.login-logo-text {
+  font-weight: bold;
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: rgb(26, 62, 193);
+}
+
+/* Student image */
+.student-image {
+  width: 100%; /* Scale image to container width */
+  max-width: 400px; /* Prevent it from becoming too large */
+  margin-left: 0; /* Center the image on smaller screens */
+  z-index: 1;
+}
+
+/* Right section containing the form */
+.login-right {
+  height: auto; /* Allow height to adjust */
+  background-color: #d1ecea;
+  padding: 20px;
+  flex: 1; /* Adjust flex ratio */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-top-left-radius: 35px; /* Top-left corner */
+  border-bottom-left-radius: 35px; /* Bottom-left corner */
+  width: 100%; /* Default width for smaller screens */
+  max-width: 500px; /* Limit the max width */
+}
+
+/* Login title */
+.login-title {
+  font-size: 24px; /* Slightly smaller font for smaller screens */
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Google login button */
+.google-login-btn {
+  display: flex;
+  gap: 5px;
+  background-color: #d1ecea;
+  border: none;
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 20px;
+  align-items: center;
+}
+
+.google-login-btn img {
+  width: 30px; /* Adjust image size for smaller screens */
+}
+
+/* OR text separator */
+.or-text {
+  margin: 10px 0;
+  font-size: 16px;
+  color: #888;
+}
+
+/* Input fields for username and password */
+.input-field {
+  margin-bottom: 15px;
+  width: 90%; /* Adjust width for smaller screens */
+}
+
+.input-field input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #d1ecea;
+  font-size: 16px;
+  border: none;
+  margin: 15px;
+  border-bottom: 1px solid #c4c4c4;
+}
+
+/* Login button */
+.login-btn {
+  background-color: #0056b3; /* UniPal blue color */
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 10px;
+  width: 80%; /* Slightly smaller button for smaller screens */
+  font-size: 16px;
+  margin: 15px;
+  margin-top: 25px;
+}
+
+/* Signup text below the login button */
+.signup-text {
+  margin-top: 20px;
+  font-size: 14px;
+  text-align: center; /* Center align for smaller screens */
+}
+
+.signup-text a {
+  color: #0056b3;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .login-container {
+    flex-direction: column; /* Stack sections vertically */
+  }
+
+  .login-left {
+    margin: 10px 0;
+  }
+
+  .login-right {
+    border-radius: 0; /* Remove rounded corners */
+    padding: 15px;
+  }
+
+  .student-image {
+    max-width: 300px; /* Reduce image size */
+    margin: 0 auto; /* Center image */
+  }
+
+  .login-title {
+    font-size: 20px; /* Reduce font size */
+  }
+
+  .input-field input {
+    font-size: 14px; /* Smaller input text */
+  }
+
+  .login-btn {
+    font-size: 14px;
+    width: 90%; /* Adjust button width */
+  }
+}
