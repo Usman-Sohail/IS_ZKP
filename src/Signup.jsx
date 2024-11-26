@@ -18,31 +18,42 @@ const Signup = () => {
   const [confirmPassword, setConfirmPassword] = useState("123");
 
   const handleSignup = async () => {
-    // Check if passwords match
+    if (username.trim() === "") {
+      alert("Username cannot be empty!");
+      return;
+    }
+    if (password.trim() === "") {
+      alert("Password cannot be empty!");
+      return;
+    }
     if (password !== confirmPassword) {
       alert("Passwords do not match!");
       return;
     }
-
-    // Send the signup request to the backend
-    const response = await fetch("http://localhost:5000/signup", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ username, password }),
-    });
-
-    const data = await response.json();
-
-    if (data.message === "Account created") {
-      // Download private key file
-      downloadPrivateKeyFile(data.privateKey);
-      alert("Account created successfully!");
-    } else {
-      alert("Error during signup");
+  
+    try {
+      const response = await fetch("http://localhost:5000/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username, password }),
+      });
+  
+      const data = await response.json();
+  
+      if (response.ok && data.message === "Account created") {
+        downloadPrivateKeyFile(data.privateKey);
+        alert("Account created successfully!");
+      } else {
+        alert(data.message || "Error during signup");
+      }
+    } catch (error) {
+      console.error("Error during signup:", error);
+      alert("An unexpected error occurred");
     }
   };
+  
 
   return (
     <div className="signup-container">

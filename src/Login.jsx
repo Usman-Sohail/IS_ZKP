@@ -8,52 +8,29 @@ const Login = () => {
   const [error, setError] = useState("");
 
   const handleLogin = async () => {
-    // Start Schnorr protocol
-    const startResponse = await fetch("http://localhost:5000/login/start", {
+    // Send login request to the backend
+    const response = await fetch("http://localhost:5000/login", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username, privateKey }),
     });
-    const startData = await startResponse.json();
 
-    if (!startResponse.ok) {
-      setError(startData.message);
-      return;
-    }
+    const data = await response.json();
 
-    const { publicKey, p, g, challenge } = startData;
-
-    // Generate random `k` and commitment `r`
-    const k = Math.floor(Math.random() * (p - 2)) + 1;
-    const r = BigInt(g) ** BigInt(k) % BigInt(p);
-
-    // Compute response `s = k + challenge * privateKey mod (p-1)`
-    const s = (k + challenge * parseInt(privateKey)) % (p - 1);
-
-    
-    // Send proof to server
-    const verifyResponse = await fetch("http://localhost:5000/login/verify", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ username, r: r.toString(), s }),
-    });
-    const verifyData = await verifyResponse.json();
-
-    if (verifyData.message === "Login successful") {
+    if (data.message === "Login successful") {
       alert("Login successful!");
+      // Redirect to dashboard or other page
     } else {
-      setError(verifyData.message);
+      setError(data.message); // Show error message
     }
   };
 
   return (
     <div className="login-container">
       <div className="login-left">
-        <img
-          src={studentStudying}
-          alt="Student Studying"
-          className="student-image"
-        />
+        <img src={studentStudying} alt="Student Studying" className="student-image" />
       </div>
 
       <div className="login-right">
